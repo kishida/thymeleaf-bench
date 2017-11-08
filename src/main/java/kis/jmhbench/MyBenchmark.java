@@ -55,7 +55,6 @@ public class MyBenchmark {
         /*
         MyBenchmark b = new MyBenchmark();
         b.setup();
-        //b.testMethod();
         System.out.println(b.engine.process("home", b.ctx));
         
         System.exit(0);

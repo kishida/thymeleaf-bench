@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>{{ i18n("html/home", "kis.title") }}</title>
+    </head>
+    <body>
+        <h1>{{ i18n("html/home", "kis.title") }}</h1>
+        <p>{{ i18n("html/home", "kis.hello") }}</p>
+    <div>
+    {{ description }}
+
+    </div>
+    <table>
+        <tr>
+            <th>{{ i18n("html/home", "kis.message1") }}</th>
+            <th>{{ i18n("html/home", "kis.message2") }}</th>
+            <th>{{ i18n("html/home", "kis.message3") }}</th>
+        </tr>
+{% for row in data %}
+        <tr>
+            <td>{{row.name}}</td>
+            <td>{{row.value}}</td>
+            <td>{{row.description}}</td>
+        </tr>
+{% endfor %}
+    </table>
+    </body>
+</html>
+
