@@ -26,9 +26,13 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 public class PebbleBench {
     PebbleEngine engine;
     HashMap ctx;
+    HashMap ctxen;
+
+    PebbleTemplate template;
+    PebbleTemplate templateen;
     
     @Setup
-    public void setup() {
+    public void setup() throws PebbleException {
         engine = new PebbleEngine.Builder().build();
         ctx = new HashMap();
         ctx.put("description", "テンプレートのテストをします");
@@ -36,24 +40,40 @@ public class PebbleBench {
                 new Row("最初", 123, "これ"),
                 new Row("真ん中", 2345, "それ"),
                 new Row("最後", 45678, "どれ")));        
+        ctxen = new HashMap();
+        ctxen.put("description", "Test a template");
+        ctxen.put("data", Arrays.asList(
+                new Row("first", 123, "this"),
+                new Row("middle", 2345, "that"),
+                new Row("last", 45678, "whot")));        
+        template = engine.getTemplate("html/home.pebble");
+        templateen = engine.getTemplate("html/homeen.pebble");
     }
     
     @Benchmark
     public void test() throws PebbleException, IOException {
-        PebbleTemplate template = engine.getTemplate("html/home.pebble");
         StringWriter sw = new StringWriter();
         template.evaluate(sw, ctx);
         sw.toString();
     }
-    public static void main(String[] args) throws PebbleException, IOException, RunnerException {
-        /*
-        PebbleBench bench = new PebbleBench();
-        bench.setup();
-        PebbleTemplate template = bench.engine.getTemplate("html/home.pebble");
+
+    @Benchmark
+    public void testen() throws PebbleException, IOException {
         StringWriter sw = new StringWriter();
-        template.evaluate(sw, bench.ctx);
-        System.out.println(sw);
-         */
+        template.evaluate(sw, ctxen);
+        sw.toString();
+    }
+    public static void main(String[] args) throws PebbleException, IOException, RunnerException {
+        if (false) {
+            PebbleBench bench = new PebbleBench();
+            bench.setup();
+            PebbleTemplate template = bench.engine.getTemplate("html/homeen.pebble");
+            StringWriter sw = new StringWriter();
+            template.evaluate(sw, bench.ctxen);
+            System.out.println(sw);
+            System.exit(0);
+        }
+         
         Options opt = new OptionsBuilder()
                 .include(PebbleBench.class.getSimpleName())
                 .forks(1)

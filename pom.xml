@@ -60,11 +60,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf</artifactId>
-            
+
+            <!--            
             <version>3.0.2.RELEASE</version>
-            <!--
-            <version>2.1.5.RELEASE</version>
             -->
+            <version>2.1.5.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

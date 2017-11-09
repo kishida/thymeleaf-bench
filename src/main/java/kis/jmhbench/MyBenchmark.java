@@ -27,6 +27,7 @@ public class MyBenchmark {
     
     TemplateEngine engine;
     Context ctx;
+    Context ctxen;
 
     @Setup
     public void setup() {
@@ -44,21 +45,31 @@ public class MyBenchmark {
                 new Row("最初", 123, "これ"),
                 new Row("真ん中", 2345, "それ"),
                 new Row("最後", 45678, "どれ")));
+        ctxen = new Context();
+        ctxen.setVariable("description", "Test a template");
+        ctxen.setVariable("data", Arrays.asList(
+                new Row("first", 123, "this"),
+                new Row("middle", 2345, "that"),
+                new Row("last", 45678, "whot")));        
+        
     }
     
     @Benchmark
     public void test() {
         engine.process("home", ctx);
     }
-    
+    @Benchmark
+    public void testen() {
+        engine.process("homeen", ctxen);
+    }
     public static void main(String[] args) throws RunnerException {
-        /*
-        MyBenchmark b = new MyBenchmark();
-        b.setup();
-        System.out.println(b.engine.process("home", b.ctx));
-        
-        System.exit(0);
-        */
+        if (false) {
+            MyBenchmark b = new MyBenchmark();
+            b.setup();
+            System.out.println(b.engine.process("homeen", b.ctxen));
+
+            System.exit(0);
+        }
         Options opt = new OptionsBuilder()
                 .forks(1)
                 .include(MyBenchmark.class.getSimpleName())

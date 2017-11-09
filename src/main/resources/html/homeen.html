@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{kis.title}">title</title>
+    </head>
+    <body>
+        <h1 th:text="#{kis.title}">title</h1>
+        <p th:text="#{kis.hello}">hello</p>
+    <div th:inline="text">
+    [[ ${description} ]]
+    </div>
+    <table>
+        <tr>
+            <th th:inline="text">[[#{kis.message1}]]</th>
+            <th th:inline="text">[[#{kis.message2}]]</th>
+            <th th:inline="text">[[#{kis.message3}]]</th>
+        </tr>
+        <tr th:each="row : ${data}">
+            <td th:inline="text">[[${row.name}]]</td>
+            <td th:inline="text">[[${row.value}]]</td>
+            <td th:inline="text">[[${row.description}]]</td>
+        </tr>
+    </table>
+    </body>
+</html>
